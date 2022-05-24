@@ -32,11 +32,13 @@ application {
 repositories {
     mavenCentral()
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
+    maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
     // https://mvnrepository.com/artifact/com.rabbitmq/amqp-client
     implementation("com.rabbitmq:amqp-client:5.14.2")
+    implementation("com.github.JUtupe:ktor-rabbitmq:0.4.0")
     implementation("io.ktor:ktor-server-resources:$ktor_version")
     implementation("io.ktor:ktor-server-auth:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
@@ -54,4 +56,6 @@ dependencies {
     implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
     // Apache Http Client
     implementation("io.ktor:ktor-client-apache:$ktor_version")
+    // https://mvnrepository.com/artifact/io.ktor/ktor-jackson
+    implementation("io.ktor:ktor-jackson:1.6.8")
 }
