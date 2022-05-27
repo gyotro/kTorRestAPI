@@ -7,20 +7,20 @@ import pl.jutupe.ktor_rabbitmq.rabbitConsumer
 
 fun Application.consume(log: Logger) {
     log.info("Starting Consumer")
-val autoAck = false
-//consume with autoack example
+    val autoAck = true
     rabbitConsumer {
-/*        this.withChannel {
+        withChannel {
             basicConsume(
                 "queueTopic",
                 autoAck,
+                // DeliveryCallback
                 { consumerTag, message ->
                     runCatching {
                         val mappedEntity = deserialize<String>(message.body)
-                        logger?.info("MappedEntity: $mappedEntity, /n" +
-                        "routingKey: ${message.envelope.routingKey}")
+                        log.info("MappedEntity: $mappedEntity, \n " +
+                                "routingKey: ${message.envelope.routingKey}")
                     }.getOrElse { throwable ->
-                        logger?.error(
+                        log.error(
                             "DeliverCallback error: (" +
                                     "messageId = ${message.properties.messageId}, " +
                                     "consumerTag = $consumerTag)",
@@ -29,12 +29,14 @@ val autoAck = false
                     }
                 },
                 { consumerTag ->
-                    logger?.error("Consume cancelled: (consumerTag = $consumerTag)")
+                    log.error("Consume cancelled: (consumerTag = $consumerTag)")
                 }
             )
-        }*/
-        consume<String>("queueTopic") { body ->
-            log.info("Consumed message $body")
         }
     }
-}
+//consume with autoack example
+
+/*        consume<String>("queueTopic") { body ->
+            log.info("Consumed message $body")
+        }*/
+    }

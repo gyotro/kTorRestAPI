@@ -8,7 +8,7 @@ import pl.jutupe.ktor_rabbitmq.publish
 
 fun Route.routes() {
     get("/") {
-        call.respondText("Welkome to Boruto API!", contentType = ContentType.Text.Plain, HttpStatusCode.OK)
+        call.respondText("Welkome to API!", contentType = ContentType.Text.Plain, HttpStatusCode.OK)
     }
 
 }

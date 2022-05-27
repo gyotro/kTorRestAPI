@@ -14,6 +14,7 @@ import org.koin.ktor.ext.inject
 
 fun Route.getFromClient(log: Logger) {
     val testEnv = System.getenv("TEST_ENV") ?: "Error"
+    val testEnv2 = environment?.config?.propertyOrNull("ktor.environment.trasm")?.getString() ?: "nada"
     val apacheClient by inject<ApacheClient>()
     get("/client") {
         try {
@@ -30,7 +31,7 @@ fun Route.getFromClient(log: Logger) {
         call.respond(status = HttpStatusCode.OK, message = Pingpong("ping", "pong"))
     }
     get("/env"){
-        call.respond(status = HttpStatusCode.OK, message = "Environment variable read is $testEnv")
+        call.respond(status = HttpStatusCode.OK, message = "Environment variable read is $testEnv2")
     }
 }
 @Serializable
