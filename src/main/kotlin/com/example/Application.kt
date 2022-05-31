@@ -12,7 +12,7 @@ fun Application.module() {
     // l'ordine dei plugin è importante
     configureKoin()
     resources()
-    //configureRabbitMQ(log)
+    configureRabbitMQ(log)
     configureAuthentication()
     configureSerialization()
     configureMonitoring()
